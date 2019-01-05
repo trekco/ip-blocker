@@ -52,7 +52,7 @@ namespace IpBlocker.Core.Extensions
         /// <returns></returns>
         public static string[] ToArray(this string value)
         {
-            return value.Trim(',', ';', ' ').Split(',', ';');
+            return value.Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries).Select(v => v.Trim(',', ';', ' ')).ToArray();
         }
 
         /// <summary>

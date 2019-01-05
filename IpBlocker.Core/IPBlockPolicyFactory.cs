@@ -1,5 +1,8 @@
 ﻿using IpBlocker.Core.Objects;
 using System;
+using System.Configuration;
+using IpBlocker.Core.Extensions;
+using System.Linq;
 
 namespace IpBlocker.Core
 {
@@ -8,19 +11,22 @@ namespace IpBlocker.Core
         public IPBlockPolicy GetPolicy(BlockedEntry blockEntry)
         {
 
-            var shouldBlock = !blockEntry.IpLocation.ToLower().Contains("south africa");
+            var whiteListedLocations = ConfigurationManager.AppSettings["IPBlockPolicyFactory:WhiteListedLocations"].ToArray();
+            var whiteListedIps = ConfigurationManager.AppSettings["IPBlockPolicyFactory:WhiteListedIps"].ToArray();
+                                 
+            var shouldBlock = !whiteListedLocations.Any(l => blockEntry.IpLocation.Trim().ToLower().Contains(l.ToLower()));
             var blockTime = TimeSpan.FromHours(24);
 
-            if(blockEntry.IpLocation.ToLower().Contains("south africa"))
+            if(!shouldBlock)
             {
                 blockTime = TimeSpan.FromSeconds(0);
             }
-            else if (blockEntry.IpLocation.ToLower().Contains("Unknown"))
+            else if (shouldBlock && blockEntry.IpLocation.ToLower().Contains("Unknown"))
             {
                 blockTime = TimeSpan.FromMinutes(60);
             }
 
-            if(blockEntry.Ip == "127.0.0.1")
+            if(whiteListedIps.Any(ip => ip.Equals(blockEntry.Ip)))
             {
                 blockTime = TimeSpan.FromSeconds(0);
                 shouldBlock = false;
