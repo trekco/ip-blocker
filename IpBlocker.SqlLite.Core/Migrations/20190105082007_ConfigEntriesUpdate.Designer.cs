@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IpBlocker.SqlLite.Core.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20190103103445_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190105082007_ConfigEntriesUpdate")]
+    partial class ConfigEntriesUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,7 @@ namespace IpBlocker.SqlLite.Core.Migrations
 
                     b.Property<bool>("IsBlocked");
 
-                    b.Property<int>("Port");
+                    b.Property<string>("Ports");
 
                     b.Property<string>("Protocol");
 
@@ -46,6 +46,17 @@ namespace IpBlocker.SqlLite.Core.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BlockedIpRecords");
+                });
+
+            modelBuilder.Entity("IpBlocker.SqlLite.Core.Objects.ConfigEntry", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConfigEntries");
                 });
 #pragma warning restore 612, 618
         }

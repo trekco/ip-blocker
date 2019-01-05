@@ -6,11 +6,11 @@ using System.IO;
 namespace IpBlocker.SqlLite.Core
 {
     /// <summary>
-    /// dotnet ef --startup-project ../IpBlocker.Core.TempProgram/ migrations add RemovePoop
+    /// dotnet ef --startup-project ../IpBlocker.Core.TempProgram/ migrations add ConfigEntriesUpdate
     /// </summary>
     public class DatabaseContext : DbContext
     {        
-        private const string DBFileName = "test.sqlite";
+        private const string DBFileName = "IP-Blocker-Data.sqlite";
 
 
         public DatabaseContext()
@@ -20,15 +20,17 @@ namespace IpBlocker.SqlLite.Core
 
         
         public DbSet<BlockedIpRecord> BlockedIpRecords { get; set; }
-
+        public DbSet<ConfigEntry> ConfigEntries { get; set; }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
-            optionBuilder.UseSqlite($"Data Source=test.sqlite");
+            optionBuilder.UseSqlite($"Data Source={DBFileName}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BlockedIpRecord>().ToTable("BlockedIpRecords");
+            modelBuilder.Entity<ConfigEntry>().ToTable("ConfigEntries");
         }
 
         public void DeleteExistingDB()

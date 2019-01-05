@@ -1,65 +1,61 @@
-﻿using System;
-using System.Linq;
-
-using IpBlocker.Core;
+﻿using IpBlocker.Core;
 using IpBlocker.Core.Interfaces;
-using IpBlocker.Core.Objects;
+using IpBlocker.Interfaces;
+using IpBlocker.IpLocation.Maxmind;
+using IpBlocker.Services;
 using IpBlocker.SqlLite.Core;
 using IpBlocker.WindowsFirewall;
-
 using IpBLocker.MailEnable;
+using SimpleInjector;
+using System;
+using Topshelf;
 
 namespace IpBlocker
 {
     internal class Program
     {
-        static IDataStore dataStore;
+        private static readonly Container container;
+
+        static Program()
+        {
+            container = new Container();
+
+            container.RegisterSingleton<IIPLocator>(() =>
+            {
+                var mm = new MaxmindIpLocation();
+                mm.Initialize();
+                return mm;
+            });
+
+            container.Register<IIPBlockPolicyFactory, IPBlockPolicyFactory>();
+            container.RegisterSingleton<IDataStore, SqlLiteDateStore>();
+            container.Register<ILogReader, MailEnableActivityLogReader>();
+            container.Register<IFirewallIpBlocker, WindowsFirewallIpBlocker>();
+            container.Register<IBlockService, BlockService>();
+            container.Register<IUnBlockService, UnBlockService>();
+
+            container.Verify();
+        }
+
         private static void Main(string[] args)
         {
-
-            dataStore  = new SqlLiteDateStore();            
-
-            try
+            var rc = HostFactory.Run(x =>
             {
-                BlockIps();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            Console.ReadKey();
-        }
-                
-
-        private static void BlockIps()
-        {
-            var from = new DateTime(2018, 11, 24, 0, 0, 0);
-
-            ILogReader logFileDataSource = new MailEnableActivityLogReader();
-            IFirewallIpBlocker ipBlocker = new WindowsFirewallIpBlocker();
-           
-            var blockPolicyFactory = new IPBlockPolicyFactory();
-
-            var badIps = logFileDataSource.GetBadIps(from);
-
-            foreach (var ipEntry in badIps)
-            {
-                var isBlocked = dataStore.IsIPBlocked(ipEntry.IP, logFileDataSource.GetName(), ipEntry.Port, ipEntry.Protocol.ToString());
-
-                if (!isBlocked)
+                x.Service<MainService>(s =>
                 {
-                    var blockEntry = new BlockedEntry(ipEntry);
-                    var policy = blockPolicyFactory.GetPolicy(blockEntry, logFileDataSource.GetName());
-                   
-                    if (policy.ShouldBlock() && ipBlocker.Block(blockEntry, policy, out var ruleName))
-                    {
-                        blockEntry.RuleName = ruleName;
-                        blockEntry.IsBLocked = true;
-                        dataStore.Add(blockEntry, policy, logFileDataSource.GetName());
-                    }
-                }
-            }
+                    s.ConstructUsing(name => new MainService(container));
+                    s.WhenStarted(tc => tc.Start());
+                    s.WhenStopped(tc => tc.Stop());
+                });
+                x.RunAsLocalSystem();
+
+                x.SetDescription("IpBlocker Service");
+                x.SetDisplayName("IpBlocker Service");
+                x.SetServiceName("IpBlocker");
+            });
+
+            var exitCode = (int)Convert.ChangeType(rc, rc.GetTypeCode());
+            Environment.ExitCode = exitCode;
         }
     }
 }

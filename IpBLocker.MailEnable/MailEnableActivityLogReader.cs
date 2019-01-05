@@ -53,7 +53,7 @@ namespace IpBLocker.MailEnable
                 Message = e.CommandResponse,                
                 Time = e.EntryDateTime,
                 ValidationData = e.Data,
-                Port = 25,
+                Ports = new int[] { 25, 587, 110, 143, 993, 995, 465 },
                 Protocol = NetworkProtocol.TCP
             }).ToList();
         }

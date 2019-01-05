@@ -11,20 +11,25 @@ namespace IpBLocker.MailEnable
     {
         private readonly CsvReader _csvReader;
         private readonly StreamReader _streamReader;
+        private readonly FileStream _fileStream;
 
         public LogReader(string filePath)
         {
-            _streamReader = new StreamReader(filePath);
+            _fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            _streamReader = new StreamReader(_fileStream);
             _csvReader = new CsvReader(_streamReader);
 
             _csvReader.Configuration.Delimiter = "\t";
             _csvReader.Configuration.HasHeaderRecord = true;
             _csvReader.Configuration.RegisterClassMap<ActivityEntryMap>();
-            _csvReader.Configuration.BadDataFound = x => { Console.WriteLine($"Bad data: <{x.RawRecord}>"); };
+            _csvReader.Configuration.BadDataFound = x => {
+               // Console.WriteLine($"Bad data: <{x.RawRecord}>");
+            };
         }
 
         public void Dispose()
         {
+            _fileStream?.Dispose();
             _streamReader?.Dispose();
             _csvReader?.Dispose();
         }
@@ -42,7 +47,7 @@ namespace IpBLocker.MailEnable
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                //Console.WriteLine(e);
                 return default(T);
             }
         }
