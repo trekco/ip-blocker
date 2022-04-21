@@ -3,19 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker", "IPBlocker\IpBlocker.csproj", "{C9FDC938-4272-4BFC-91EA-B061A6AD87F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.Core", "src\IpBlocker.Core\IpBlocker.Core.csproj", "{098EAB3C-5ECC-4E7D-B126-A1253BCF5A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.MailEnable", "IpBLocker.MailEnable\IpBlocker.MailEnable.csproj", "{4730AEEB-E3A2-4C8A-BDDF-90510DA109EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.IpLocation.Maxmind", "src\IpBlocker.IpLocation.Maxmind\IpBlocker.IpLocation.Maxmind.csproj", "{0ACDDADD-50DA-4976-9FF2-2740C61F5B30}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IpBlocker.SqlLite.Core", "IpBlocker.SqlLite.Core\IpBlocker.SqlLite.Core.csproj", "{BAEEAA54-ACBB-4DFE-AE31-373EA0907AEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.MailEnable", "src\IpBlocker.MailEnable\IpBlocker.MailEnable.csproj", "{08DB589B-AF21-4E37-9769-F0AE8C6E2A2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IpBlocker.Core", "IpBlocker.Core\IpBlocker.Core.csproj", "{9716A000-EA22-4873-A10E-6C6635CDFA8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.SqlLite.Core", "src\IpBlocker.SqlLite.Core\IpBlocker.SqlLite.Core.csproj", "{4010307E-BC3E-451B-BD22-AE2530322609}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IpBlocker.Core.TempProgram", "IpBlocker.Core.TempProgram\IpBlocker.Core.TempProgram.csproj", "{3E5F84A3-CEA5-4E8D-85C3-F9A9DBF22309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.WindowsFirewall", "src\IpBlocker.WindowsFirewall\IpBlocker.WindowsFirewall.csproj", "{A067A427-7292-4061-A672-2478FA4DC361}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.WindowsFirewall", "IpBlocker.WindowsFirewall\IpBlocker.WindowsFirewall.csproj", "{1ACCCFB5-A417-4F23-96C6-D79EBF6A4861}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker.IpLocation.Maxmind", "IpBlocker.IpLocation.Maxmind\IpBlocker.IpLocation.Maxmind.csproj", "{E821E1A7-ECD4-4E6A-A712-AD3F0A89966C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IpBlocker", "src\IpBlocker\IpBlocker.csproj", "{541495C5-0BFF-445C-9775-FBBE58F2C7EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,39 +21,37 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C9FDC938-4272-4BFC-91EA-B061A6AD87F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9FDC938-4272-4BFC-91EA-B061A6AD87F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9FDC938-4272-4BFC-91EA-B061A6AD87F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9FDC938-4272-4BFC-91EA-B061A6AD87F4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4730AEEB-E3A2-4C8A-BDDF-90510DA109EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4730AEEB-E3A2-4C8A-BDDF-90510DA109EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4730AEEB-E3A2-4C8A-BDDF-90510DA109EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4730AEEB-E3A2-4C8A-BDDF-90510DA109EC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BAEEAA54-ACBB-4DFE-AE31-373EA0907AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BAEEAA54-ACBB-4DFE-AE31-373EA0907AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BAEEAA54-ACBB-4DFE-AE31-373EA0907AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BAEEAA54-ACBB-4DFE-AE31-373EA0907AEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9716A000-EA22-4873-A10E-6C6635CDFA8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9716A000-EA22-4873-A10E-6C6635CDFA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9716A000-EA22-4873-A10E-6C6635CDFA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9716A000-EA22-4873-A10E-6C6635CDFA8C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E5F84A3-CEA5-4E8D-85C3-F9A9DBF22309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3E5F84A3-CEA5-4E8D-85C3-F9A9DBF22309}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3E5F84A3-CEA5-4E8D-85C3-F9A9DBF22309}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3E5F84A3-CEA5-4E8D-85C3-F9A9DBF22309}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1ACCCFB5-A417-4F23-96C6-D79EBF6A4861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ACCCFB5-A417-4F23-96C6-D79EBF6A4861}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ACCCFB5-A417-4F23-96C6-D79EBF6A4861}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ACCCFB5-A417-4F23-96C6-D79EBF6A4861}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E821E1A7-ECD4-4E6A-A712-AD3F0A89966C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E821E1A7-ECD4-4E6A-A712-AD3F0A89966C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E821E1A7-ECD4-4E6A-A712-AD3F0A89966C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E821E1A7-ECD4-4E6A-A712-AD3F0A89966C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{098EAB3C-5ECC-4E7D-B126-A1253BCF5A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{098EAB3C-5ECC-4E7D-B126-A1253BCF5A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{098EAB3C-5ECC-4E7D-B126-A1253BCF5A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{098EAB3C-5ECC-4E7D-B126-A1253BCF5A55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ACDDADD-50DA-4976-9FF2-2740C61F5B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ACDDADD-50DA-4976-9FF2-2740C61F5B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ACDDADD-50DA-4976-9FF2-2740C61F5B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ACDDADD-50DA-4976-9FF2-2740C61F5B30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08DB589B-AF21-4E37-9769-F0AE8C6E2A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08DB589B-AF21-4E37-9769-F0AE8C6E2A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08DB589B-AF21-4E37-9769-F0AE8C6E2A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08DB589B-AF21-4E37-9769-F0AE8C6E2A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4010307E-BC3E-451B-BD22-AE2530322609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4010307E-BC3E-451B-BD22-AE2530322609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4010307E-BC3E-451B-BD22-AE2530322609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4010307E-BC3E-451B-BD22-AE2530322609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A067A427-7292-4061-A672-2478FA4DC361}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A067A427-7292-4061-A672-2478FA4DC361}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A067A427-7292-4061-A672-2478FA4DC361}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A067A427-7292-4061-A672-2478FA4DC361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541495C5-0BFF-445C-9775-FBBE58F2C7EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541495C5-0BFF-445C-9775-FBBE58F2C7EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541495C5-0BFF-445C-9775-FBBE58F2C7EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541495C5-0BFF-445C-9775-FBBE58F2C7EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3F10474-3E64-499E-8A5F-A34664D9F836}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
 EndGlobal
